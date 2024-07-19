@@ -1,21 +1,19 @@
-extends layout
-
-block content
-  h1.w3-center Lista de Compras: #{lista.designacao}
-  a(href="/") Voltar à Página Principal
-  h2 Produtos na Lista
-  table.w3-table-all.w3-centered
-    thead
-      tr
-        th ID
-        th Designação
-        th Categoria
-        th Quantidade
-    tbody
-      each produto in lista.produtos
+doctype html
+html
+  head
+    title #{title}
+  body
+    h1 #{title}
+    a(href='/') Voltar
+    table
+      thead
         tr
-          td
-            a(href=`/produtos/${produto._id}`) #{produto._id}
-          td= produto.designacao
-          td= produto.categoria
-          td #{produto.quantidade.valor} #{produto.quantidade.unidade}
+          th Designação
+          th Categoria
+          th Quantidade
+      tbody
+        each produto in lista.produtos
+          tr
+            td #{produto.designacao}
+            td #{produto.categoria}
+            td #{produto.quantidade.valor} #{produto.quantidade.unidade}

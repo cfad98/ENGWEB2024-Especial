@@ -1,46 +1,32 @@
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
+var express = require('express');
+var path = require('path');
+var logger = require('morgan');
+var indexRouter = require('./routes/index');
+var produtosRouter = require('./routes/produtos');
 
-const indexRouter = require('./routes/index');
-const listasRouter = require('./routes/listas');
-const produtosRouter = require('./routes/produtos');
+var app = express();
 
-const app = express();
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Configurar o motor de views para usar Pug
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// Middleware
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Rotas
 app.use('/', indexRouter);
-app.use('/listas', listasRouter);
-app.use('/produtos', produtosRouter);
+app.use('/', produtosRouter);
 
-// Tratamento de erros
-app.use((req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function(req, res, next) {
+  res.status(404).render('error', { message: 'Not Found' });
 });
 
-app.use((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error');
-});
-
-const PORT = 18001;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  res.render('error', {
+    message: err.message,
+    error: err
+  });
 });
 
 module.exports = app;

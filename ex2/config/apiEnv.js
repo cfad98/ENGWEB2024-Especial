@@ -1,5 +1,3 @@
-const baseUrl = 'http://localhost:3000'; // URL base da API
-
-module.exports = {
-  apiRoute: (path) => `${baseUrl}${path}`
-};
+module.exports.apiPort = 18000
+module.exports.apiAcessUrl = `http://teste2024api:${this.apiPort}`
+module.exports.apiRoute = (route) => this.apiAcessUrl + route
