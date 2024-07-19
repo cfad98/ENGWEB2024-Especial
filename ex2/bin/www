@@ -5,14 +5,14 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('ex2:server');
+var debug = require('debug')('interface:server');
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort('18001');
+var port = normalizePort(process.env.PORT || '18001');
 app.set('port', port);
 
 /**
@@ -82,10 +82,5 @@ function onError(error) {
  */
 
 function onListening() {
-  // var addr = server.address();
-  // var bind = typeof addr === 'string'
-  //   ? 'pipe ' + addr
-  //   : 'port ' + addr.port;
-  // debug('Listening on ' + bind);
-  console.log('Servidor à escuta na porta: ' + port)
+  console.log("à escuta na porta: " + port)
 }

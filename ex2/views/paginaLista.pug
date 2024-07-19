@@ -1,0 +1,40 @@
+extends layout
+
+block content
+    .w3-card-4
+        header.w3-container.w3-teal
+            h1
+                span Info Lista
+
+        .w3-container
+            ul.w3-ul.w3-card-4(style="width:50%")
+                li
+                    b Designacao: #{lista.designacao}
+                li
+                    b Data: #{lista.data}
+
+        .w3-container
+            header.w3-container.w3-blue
+                h1
+                    span Produtos da Lista
+            
+            table.w3-table-all
+                tr
+                    th id
+                    th Nome
+                    th Categoria
+                    th Quantidade
+                    th Valor
+
+                each produto in lista.produtos
+                    tr
+                        td
+                            a(href="/produtos" + produto._id)= produto._id
+                        td= produto.designacao
+                        td= produto.categoria
+                        td= produto.quantidade.unidade
+                        td= produto.quantidade.valor
+
+    .w3-cell.w3-container.w3-margin-bottom
+        a.w3-button.w3-teal(href="/")
+            b Back to All List
