@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1.w3-center W3.CSS Listas de Compras
+  table.w3-table-all.w3-centered
+    thead
+      tr
+        th ID
+        th Designação
+        th Data
+        th "#Produtos"
+    tbody
+      each lista in listas
+        tr
+          td
+            a(href=`/listas/${lista._id}`) #{lista._id}
+          td= lista.designacao
+          td= lista.data
+          td= lista.produtos.length

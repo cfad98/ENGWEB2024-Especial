@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1.w3-center Detalhes do Produto: #{produto.designacao}
+  a(href="/") Voltar à Página Principal
+  h2 Listas de Compras Contendo Este Produto
+  table.w3-table-all.w3-centered
+    thead
+      tr
+        th ID
+        th Designação
+        th Data
+        th Quantidade
+    tbody
+      each lista in listas
+        tr
+          td
+            a(href=`/listas/${lista._id}`) #{lista._id}
+          td= lista.designacao
+          td= lista.data
+          td #{lista.produtos.find(p => p._id === produto._id).quantidade.valor} #{lista.produtos.find(p => p._id === produto._id).quantidade.unidade}
+  p Total de Listas: #{listas.length}
