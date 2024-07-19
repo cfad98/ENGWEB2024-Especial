@@ -4,6 +4,15 @@
 
 ### 1.1
 
+Foi desenvolvido um script Python para preparar o dataset dataset.json para importação no MongoDB. O script realiza as seguintes etapas:
+
+- Carregar o Dataset: O dataset original é carregado a partir do arquivo JSON.
+- Adicionar o Parâmetro _id: Adiciona um campo _id a cada objeto da lista, com valores sequenciais começando de 1. Este campo é necessário para a importação correta no MongoDB, que utiliza _id como identificador único dos documentos.
+- Salvar o Dataset Modificado: O dataset modificado é salvo em um novo arquivo dataset_modificado.json.
+Este dataset foi importado para o mongo utilizando o comando: 
+```
+mongoimport -d compras -c listas --type json --file dataset_modificado.json --jsonArray
+```
 
 ### 1.2
 
